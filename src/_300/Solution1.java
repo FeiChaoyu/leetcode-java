@@ -45,7 +45,8 @@ public class Solution1 {
             }
         }
 
-        return memo[index] = res;
+        memo[index] = res;
+        return memo[index];
     }
 
     public static void main(String[] args) {

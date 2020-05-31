@@ -1,9 +1,11 @@
 package _416;
 
 /**
- * Dynamic Programming
- * Time Complexity: O(len(nums) * O(sum(nums)))
- * Space Complexity: O(len(nums) * O(sum(nums)))
+ * 二维DP
+ * 状态定义：dp(i, j) 将i个元素放入容量为j的背包
+ * 状态转移方程：dp(i, j) = dp(i-1, j) || dp(i-1, j-nums(i))
+ * dp(i-1, j) 表示不考虑索引为i的元素，用i-1个元素已经可以填满容量为j的背包
+ * dp(i-1, j-nums(i)) 表示用i-1个元素已经可以填满容量为j-nums[i]的背包
  *
  * @author feichaoyu
  */
@@ -19,25 +21,31 @@ public class Solution2 {
             sum += nums[i];
         }
 
+        // sum必须是偶数才可以分成相等两部分
         if (sum % 2 != 0) {
             return false;
         }
 
         int n = nums.length;
-        int C = sum / 2;
+        int target = sum / 2;
+        boolean[][] dp = new boolean[n][target + 1];
 
-        boolean[] memo = new boolean[C + 1];
-        for (int i = 0; i <= C; i++) {
-            memo[i] = (nums[0] == i);
+        for (int i = 0; i <= target; i++) {
+            dp[0][i] = (nums[0] == i);
         }
 
         for (int i = 1; i < n; i++) {
-            for (int j = C; j >= nums[i]; j--) {
-                memo[j] = memo[j] || memo[j - nums[i]];
+            for (int j = 0; j <= target; j++) {
+                // 1.不考虑索引为i的元素，用i-1个元素已经可以填满容量为j的背包
+                dp[i][j] = dp[i - 1][j];
+                // 2.用i-1个元素已经可以填满容量为j-nums[i]的背包
+                if (j >= nums[i]) {
+                    dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i]];
+                }
             }
         }
 
-        return memo[C];
+        return dp[n - 1][target];
     }
 
     private static void printBool(boolean res) {

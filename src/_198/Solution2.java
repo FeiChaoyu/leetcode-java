@@ -1,13 +1,12 @@
 package _198;
 
 /**
- * Dynamic Programming
- * Time Complexity: O(n)
- * Space Complexity: O(n)
+ * DP
+ * 状态定义：dp[i]表示偷取[x...n-1]范围内的房子所获取的金额
+ * 转移方程：dp[i] = max{dp[i+1], nums[i] + dp[i+2] }
  *
  * @author feichaoyu
  */
-//其他方法：https://github.com/liuyubobobo/Play-Leetcode/tree/master/0198-House-Robber/java-0198/src
 public class Solution2 {
 
     public int rob(int[] nums) {
@@ -17,22 +16,16 @@ public class Solution2 {
             return 0;
         }
 
-        // memo[i] 表示考虑抢劫 nums[i...n) 所能获得的最大收益
-        int[] memo = new int[nums.length];
-        memo[n - 1] = nums[n - 1];
-
+        int[] dp = new int[n];
+        dp[n - 1] = nums[n - 1];
         for (int i = n - 2; i >= 0; i--) {
-            // 1
-            for (int j = i; j < n; j++) {
-                // memo[i] 的取值在考虑抢劫 i 号房子和不考虑抢劫之间取最大值
-                memo[i] = Math.max(memo[i], nums[j] + (j + 2 < n ? memo[j + 2] : 0));
-            }
-            // 2
-//            memo[i] = Math.max(memo[i + 1],
-//                    nums[i] + (i + 2 < n ? memo[i + 2] : 0));
+            // 1.不偷取当前这一家，那么就是第(i+1)家偷取的金额
+            // 2.偷取当前这一家加上第(i+2)家共获取的金额
+            // 两者取最大值
+            dp[i] = Math.max(dp[i + 1], nums[i] + (i + 2 < n ? dp[i + 2] : 0));
         }
 
-        return memo[0];
+        return dp[0];
     }
 
     public static void main(String[] args) {

@@ -15,11 +15,13 @@ public class Solution2 {
             throw new IllegalArgumentException("n should be greater than zero");
         }
 
+        // memo[i]表示将数字i分割后得到的最大乘积
         int[] memo = new int[n + 1];
         memo[1] = 1;
         for (int i = 2; i <= n; i++) {
-            for (int j = 1; j <= i - 1; j++) {  //这里不就是类似于Solution1中的for (int i = 1; i <= n - 1; i++)，i * (n - i)
-                // 这里是j * (i - j)
+            // 求解memo[i]
+            for (int j = 1; j <= i - 1; j++) {
+                // 将 i 分割成 j 和 (i - j)
                 memo[i] = max3(memo[i], j * (i - j), j * memo[i - j]);
             }
         }

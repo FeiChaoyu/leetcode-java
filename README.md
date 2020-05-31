@@ -44,20 +44,45 @@
 0051-N-Queens
 
 ## 动态规划
-0070-Climbing-Stairs
-
-0343-Integer-Break
-
-0198-House-Robber
-
-0416-Partition-Equal-Subset-Sum
-
-0300-Longest-Increasing-Subsequence
-
 0435-Non-overlapping-Intervals
+
+70.爬楼梯  
+
+343.整数拆分
+
+91.解码方法
+
+279.完全平方数
+
+62.不同路径 I
+
+63.不同路径 II
+
+64.最小路径和
+
+120.三角形最小路径和
+
+198.打家劫舍 I
+
+213.打家劫舍 II
+
+337.打家劫舍 III
+
+300.最长上升子序列
+
+376.摆动序列
+
+1143.最长公共子序列
+
+416.分割等和子集
+
+322.零钱兑换
 
 ## 贪心算法
 0455-Assign-Cookies
 
 0435-Non-overlapping-Intervals
+
+## 多线程
+1226.哲学家进餐
 
