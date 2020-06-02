@@ -1,36 +1,46 @@
 package _3;
 
 /**
- * Sliding Window
- * Time Complexity: O(len(s))
- * Space Complexity: O(len(charset))
+ * 滑动窗口
  *
  * @author feichaoyu
  */
-// 其他方法：https://github.com/liuyubobobo/Play-Leetcode/tree/master/0003-Longest-Substring-Without-Repeating-Characters/java-0003/src
 public class Solution1 {
 
     public int lengthOfLongestSubstring(String s) {
 
-        int[] freq = new int[256];
+        int sLen = s.length();
+        char[] charArrayS = s.toCharArray();
 
-        // sliding window: s[l...r]
-        int l = 0, r = -1;
-        int res = 0;
+        // 最多128个ASCII码字符
+        int[] winFreq = new int[128];
 
-        while (l < s.length()) {
+        // sliding window: s[left...right)
+        int left = 0, right = 0;
+        int maxLen = 0;
 
-            if (r + 1 < s.length() && freq[s.charAt(r + 1)] == 0) {
-                freq[s.charAt(++r)]++;
-            } else    //freq[s[r+1]] == 1
-            {
-                freq[s.charAt(l++)]--;
+        while (right < sLen) {
+            char charRight = charArrayS[right];
+            // 右边界字符没有出现过
+            if (winFreq[charRight] == 0) {
+                winFreq[charRight]++;
+                right++;
+            }
+            // 右边界字符之前已经出现过
+            else {
+                // 左边界右移直到滑动窗口中不包含重复字符
+                while (winFreq[charRight] != 0) {
+                    char charLeft = charArrayS[left];
+                    winFreq[charLeft]--;
+                    left++;
+                }
             }
 
-            res = Math.max(res, r - l + 1);
+            maxLen = Math.max(maxLen, right - left);
+
         }
 
-        return res;
+        return maxLen;
     }
 
     public static void main(String[] args) {

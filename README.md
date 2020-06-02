@@ -7,9 +7,13 @@
 0167-Two-Sum-II-Input-array-is-sorted
 
 ## 滑动窗口
-209-Minimum-Size-Subarray-Sum
+[3.无重复字符的最长子串](src/_3/Solution1.java)
 
-3.无重复字符的最长子串
+[76.最小覆盖子串](src/_76/Solution.java)
+
+[209.长度最小的子数组](src/_209/Solution.java)
+
+[424.替换后的最长重复字符](src/_0424/Solution.java)
 
 ## 查找表
 349.两个数组的交集
