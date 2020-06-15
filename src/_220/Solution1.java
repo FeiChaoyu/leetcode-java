@@ -1,5 +1,6 @@
 package _220;
 
+import java.util.Map;
 import java.util.TreeSet;
 
 /**
@@ -9,7 +10,7 @@ import java.util.TreeSet;
  *
  * @author feichaoyu
  */
-public class Solution {
+public class Solution1 {
 
     public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
 
@@ -17,17 +18,17 @@ public class Solution {
             return false;
         }
 
-        TreeSet<Long> record = new TreeSet<>();
+        Map<>
         for (int i = 0; i < nums.length; i++) {
 
-            // |v-x|<=t => v-t<x<v+t => ceil(v-t)<=v+t
-            // v = nums[i]
-            if (record.ceiling((long) nums[i] - (long) t) != null &&
-                    record.ceiling((long) nums[i] - (long) t) <= (long) nums[i] + (long) t) {
+            if (record.contains((long) nums[i] - (long) t)) {
                 return true;
             }
 
-            record.add((long) nums[i]);
+            if (record.contains((long) t - (long) nums[i])) {
+                return true;
+            }
+
 
             // 保持record中最多有k个元素，[0,k]中有k+1个元素
             if (record.size() == k + 1) {
@@ -44,9 +45,9 @@ public class Solution {
 
     public static void main(String[] args) {
 
-        int[] nums = {-2147483648, -2147483647};
-        int k = 3;
-        int t = 3;
-        printBool((new Solution()).containsNearbyAlmostDuplicate(nums, k, t));
+        int[] nums = {2, 1};
+        int k = 1;
+        int t = 1;
+        printBool((new Solution1()).containsNearbyAlmostDuplicate(nums, k, t));
     }
 }
