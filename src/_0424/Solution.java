@@ -18,7 +18,7 @@ public class Solution {
         char[] chars = s.toCharArray();
         // 只要求是大写字母
         int[] winFreq = new int[26];
-        // 滑动窗口内出现相同字母次数的最大值，比如[AABA]，那么chaMax=3
+        // 滑动窗口内出现相同字母次数的最大值，比如[AABA]，那么maxCount=3
         int maxCount = 0;
         int maxLen = 0;
 
